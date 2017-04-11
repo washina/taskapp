@@ -18,6 +18,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Realmインスタンスを取得する
     let realm = try! Realm()        // try! <- エラーを無視
     
+    // cell表示内容
+    var taskArray = try! Realm().objects(Task.self).sorted(byProperty: "date", ascending: false)
+
     // カテゴリの絞り込み処理
     @IBAction func searchButton(_ sender: Any) {
         // 文字が入力された上でボタンが押されれば処理開始
@@ -25,11 +28,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             // 検索のUITextFieldに入力された文字とカテゴリ名が一致するTaskを調べる
             let predicate = NSPredicate(format: "category CONTAINS %@",searchTextField.text!)
             let resultArray = realm.objects(Task.self).filter(predicate).sorted(byProperty: "date", ascending: false)
-            print(resultArray)     //test
+            print(resultArray)
+            taskArray = resultArray
+            tableView.reloadData()
+        } else {
+            // 空白処理
+            taskArray = try! Realm().objects(Task.self).sorted(byProperty: "date", ascending: false)
+            tableView.reloadData()
         }
     }
-    let taskArray = try! Realm().objects(Task.self).sorted(byProperty: "date", ascending: false)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
