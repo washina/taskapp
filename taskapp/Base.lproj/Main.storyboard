@@ -162,7 +162,7 @@
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="apl-M1-tbJ">
                             <connections>
-                                <action selector="searchButton:" destination="BYZ-38-t0r" id="TLb-4e-UZQ"/>
+                                <action selector="searchButton:" destination="BYZ-38-t0r" id="fvi-jw-00Q"/>
                             </connections>
                         </barButtonItem>
                         <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="P4V-za-Ts7">
@@ -179,7 +179,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchTextField" destination="P4V-za-Ts7" id="laa-4O-lFl"/>
+                        <outlet property="searchTextField" destination="P4V-za-Ts7" id="hWR-Mx-yXV"/>
                         <outlet property="tableView" destination="BI2-ME-u6Q" id="dDI-V3-Ycy"/>
                         <segue destination="7BS-Td-1kG" kind="show" identifier="cellSegue" id="HOQ-eV-IKM"/>
                     </connections>

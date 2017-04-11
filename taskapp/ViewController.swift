@@ -22,6 +22,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // 日付近い順\順でソート：降順
     // 以降内容をアップデートするとリスト内は自動的に更新される。
     let taskArray = try! Realm().objects(Task.self).sorted(byProperty: "date", ascending: false)
+    
+    // カテゴリの絞り込み処理
+    @IBAction func searchButton(_ sender: Any) {
+        // 文字が入力された上でボタンが押されれば処理開始
+        if searchTextField.text != "" {
+            // 検索のUITextFieldに入力された文字とカテゴリ名が一致するTaskを調べる
+            let predicate = NSPredicate(format: "category CONTAINS %@",searchTextField.text!)
+            let result = realm.objects(Task.self).filter(predicate).sorted(byProperty: "date", ascending: false)
+            print(result)     //test
+            tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,20 +110,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
-    
-    // カテゴリの検索処理
-    @IBAction func searchButton(_ sender: Any) {
-        // 文字が入力された上でボタンが押されれば処理開始
-        if searchTextField.text != "" {
-            // 検索のUITextFieldに入力された文字と一致するカテゴリを調べる
-            let predicate = NSPredicate(format: "category CONTAINS %@",searchTextField.text!)
-            print(predicate)
-            let result = realm.objects(Task.self).filter(predicate).sorted(byProperty: "date", ascending: false)
-            print(result)
-            tableView.reloadData()
-        }
-    }
-
     
     // segueで画面遷移したときに呼ばれるメソッド
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
