@@ -14,10 +14,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
         [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        /* ナビゲーションバーデザイン変更 -------------------------------------------------------------*/
+        // アイテムの色変更
+        UINavigationBar.appearance().tintColor = UIColor.white
+        // ナビゲーションバーの背景色変更
+        UINavigationBar.appearance().barTintColor = UIColor.flatWatermelon
+        // タイトルの色変更
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        /* ナビゲーションバーデザイン変更 end----------------------------------------------------------*/
         
         // ユーザーに通知の許可を求める
         let center = UNUserNotificationCenter.current()

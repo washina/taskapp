@@ -9,14 +9,30 @@
 import UIKit
 import RealmSwift
 import UserNotifications
+import ChameleonFramework           // 色関連のライブラリ
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
+    /* デザイン変更処理 --------------------------------------------------------------------------------*/
+    // cellのデザイン変更
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell,forRowAt indexPath: IndexPath) {
+        // cell背景色
+        cell.backgroundColor = ContrastColorOf(UINavigationBar.appearance().barTintColor!, returnFlat: true)
+        // cellテキスト色
+        cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor!, returnFlat: true)
+        cell.detailTextLabel?.textColor = ContrastColorOf(cell.backgroundColor!, returnFlat: true)
+        // cell境界線
+        tableView.separatorColor = UIColor.flatGrayDark
+
+    }
+    /* デザイン変更処理 end-----------------------------------------------------------------------------*/
+    
+    /* cell登録表示処理 -------------------------------------------------------------------------------*/
     // Realmインスタンスを取得する
-    let realm = try! Realm()        // try! <- エラーを無視
+    let realm = try! Realm()
     
     // cell表示内容
     var taskArray = try! Realm().objects(Task.self).sorted(byProperty: "date", ascending: false)
@@ -36,19 +52,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             taskArray = try! Realm().objects(Task.self).sorted(byProperty: "date", ascending: false)
             tableView.reloadData()
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: UITableViewDataSourceプロトコルのメソッド
@@ -113,7 +116,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
+    /* cell表示登録処理 end----------------------------------------------------------------------------*/
     
+    /* 画面遷移 --------------------------------------------------------------------------------------*/
     // segueで画面遷移したときに呼ばれるメソッド
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let inputViewController:InputViewController = segue.destination as! InputViewController
@@ -138,7 +143,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
-
+    /* 画面遷移 end-----------------------------------------------------------------------------------*/
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        // searchTextFieldのcaret色変更
+        searchTextField.tintColor = UIColor.flatGrayDark
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 
 }
 

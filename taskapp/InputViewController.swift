@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import UserNotifications
+import ChameleonFramework           // 色関連のライブラリ
 
 class InputViewController: UIViewController {
     
@@ -24,6 +25,10 @@ class InputViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // 背景色変更
+        self.view.backgroundColor = ContrastColorOf(UINavigationBar.appearance().barTintColor!, returnFlat: true)
+
         
         // 背景をタップしたらdismissKeyboardメソッドを呼ぶように設定する
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
