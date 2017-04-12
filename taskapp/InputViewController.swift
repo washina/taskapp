@@ -27,13 +27,16 @@ class InputViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         /* デザイン変更処理 ---------------------------------------------------------------------------*/
-        // 枠のカラー
+        // titleTextFieldの変更
+        titleTextField.tintColor = UIColor.flatGrayDark
+        // categoryTextFieldの変更
+        categoryTextField.tintColor = UIColor.flatGrayDark
+        // contentsTextViewの変更
         contentsTextView.layer.borderColor = UIColor.black.cgColor
-        // 枠の幅
         contentsTextView.layer.borderWidth = 1.2
+        contentsTextView.tintColor = UIColor.flatGrayDark
         /* デザイン変更処理 end------------------------------------------------------------------------*/
 
-        
         // 背景をタップしたらdismissKeyboardメソッドを呼ぶように設定する
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
