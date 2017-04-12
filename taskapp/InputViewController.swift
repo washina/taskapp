@@ -26,8 +26,12 @@ class InputViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        // 背景色変更
-        self.view.backgroundColor = ContrastColorOf(UINavigationBar.appearance().barTintColor!, returnFlat: true)
+        /* デザイン変更処理 ---------------------------------------------------------------------------*/
+        // 枠のカラー
+        contentsTextView.layer.borderColor = UIColor.black.cgColor
+        // 枠の幅
+        contentsTextView.layer.borderWidth = 1.2
+        /* デザイン変更処理 end------------------------------------------------------------------------*/
 
         
         // 背景をタップしたらdismissKeyboardメソッドを呼ぶように設定する
